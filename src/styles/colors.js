@@ -4,6 +4,7 @@ export default {
   regular: '#DDD',
   dark: '#666',
   darker: '#333',
+  black: '#000',
 
   secundary: '#999',
 
