@@ -12,14 +12,31 @@ class Repositories extends React.Component {
     title: 'GitIssues'
   }
 
-  async componentDidMount() {
+  state = {
+    data: [],
+    inputText: null
+  }
+
+  loadRepositories = async () => {
     try {
-      const response = await api.get(`/repos/react-community/react-navigation`)
-      console.tron.log(response)
+      const response = await api.get(`/repos/${this.state.inputText}`)
+      this.setState({ data: response.data })
     } catch (error) {
       console.tron.log(error)
     }
   }
+
+  renderListItem = ({ item }) => {
+    console.tron.log('FUCK')
+  }
+
+  renderList = () => (
+    <FlatList
+      data={this.state.data}
+      keyExtractor={item => String(item.id)}
+      renderItem={this.renderListItem}
+    />
+  )
 
   render() {
     return (
@@ -31,11 +48,14 @@ class Repositories extends React.Component {
             autoCapitalize="none"
             autoCorrect={false}
             underlineColorAndroid="rgba(0,0,0,0)"
+            onChangeText={text => this.setState({ inputText: text })}
           />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.loadRepositories}>
             <Icon name="plus" size={20} />
           </TouchableOpacity>
         </View>
+
+        {this.renderList()}
       </View>
     )
   }
