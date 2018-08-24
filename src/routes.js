@@ -14,7 +14,10 @@ const Navigation = StackNavigator(
     initialRouteName: 'Repositories',
     navigationOptions: {
       headerBackTitle: null,
-      headerTintColor: colors.black
+      headerTintColor: colors.black,
+      headerStyle: {
+        backgroundColor: colors.white
+      }
     }
   }
 )
